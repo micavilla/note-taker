@@ -1,10 +1,10 @@
-// Imports express package and initializes app variable by setting it to the value of express()
+// Imports Express package and initializes app variable by setting it to the value of express()
 const express = require("express");
 const app = express();
 
-// Imports frontend and API routes
-const frontendRoutes = require('./routes/frontend');
+// Imports api and frontend routers
 const apiRoutes =  require('./routes/api');
+const frontendRoutes = require('./routes/frontend');
 
 // Specifies environment variable PORT or local host
 const PORT = process.env.PORT || 3001;
@@ -14,9 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 
-// Mounts routers on root path and /api path
-app.use('/', frontendRoutes);
+// Mounts imported routers on /api path and root path
 app.use('/api', apiRoutes);
+app.use('/', frontendRoutes);
 
 // Listens for incoming connections on specified port
 app.listen(PORT, () =>

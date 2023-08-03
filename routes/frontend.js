@@ -1,12 +1,16 @@
+// Imports Node path module and Express Router function
 const path = require("path");
-const router = require('express').Router();
+const page =  require('express').Router();
 
-router.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
-
-router.get('/notes', (req, res) =>
+// Route for /notes path to serve notes.html
+page.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, '../public/notes.html'))
 );
 
-module.exports = router;
+// Wildcard route to serve index.html for any unmatched routes
+page.get('*', (req, res) =>{
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+// Exports router as a module
+module.exports = page;
